@@ -1,23 +1,93 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+:root {
+	--main-purple: rgb(75, 49, 83);
+}
 * {
 	font-family: "Quicksand";
-	padding: 2px;
 }
 body {
-	margin: 0;
 	background-color: rgb(242, 222, 206);
+	overflow: hidden;
 }
 .App {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 94vh;
+	overflow: hidden;
 }
 .content {
-	width: 800px;
+	width: 1000px;
 	height: 500px;
+	background-color: white;
+	border-radius: 50%;
+	position: relative;
 }
 .box {
 	display: flex;
-	background-color: red;
+	border-radius: 30px;
+	overflow: hidden;
+	width: 100%;
+	position: relative;
+	height: 100%;
+}
+.box-effect {
+	background-color: rgb(244, 228, 218);
+	display: flex;
+	border-radius: 30px;
+	overflow: hidden;
+	width: 100%;
+	position: relative;
+	height: 100%;
+	position: absolute;
+	transform: rotate(-3deg);
+	border: 2px solid rgb(248, 233, 224);
+}
+
+.main {
+	background-color: white;
+}
+.sidebar,
+.activity {
+	background-color: rgb(250, 250, 250);
+	display: flex;
+}
+.sidebar {
+	width: 20%;
+	padding: 7px;
+	color: var(--main-purple);
+	font-size: larger;
+	font-weight: bolder;
+}
+.activity,
+.main {
+	font-size: larger;
+	font-weight: bolder;
+	color: var(--main-purple);
+	width: 40%;
+	padding: 7px;
+	display: flex;
+	flex-direction: column;
+}
+.sidebar-list {
+	list-style-type: none;
+	margin: 5px;
+	padding: 5px;
+}
+.dashboard {
+	margin-bottom: 20px;
+	position: relative;
+}
+.card-area {
+	padding: 7px;
+	margin-bottom: 20px;
+}
+.card-body {
+	padding: 7px;
+	background-color: var(--main-purple);
+	position: relative;
+	width: 350px;
+	height: 200px;
+	border-radius: 40px;
+	color: white;
 }

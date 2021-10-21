@@ -1,6 +1,8 @@
 import Activity from "./components/Activity";
 import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
+import MyChart from "./components/Chart";
+import TransactionContextProvider from "./contexts/TransactionContext";
 
 function App() {
 	return (
@@ -8,9 +10,11 @@ function App() {
 			<div className='content'>
 				<div className='box-effect'></div>
 				<div className='box'>
-					<Sidebar />
-					<Main />
-					<Activity />
+					<TransactionContextProvider>
+						<Sidebar />
+						<Main />
+						<Activity />
+					</TransactionContextProvider>
 				</div>
 			</div>
 		</div>
