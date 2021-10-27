@@ -55,16 +55,19 @@ body {
 .sidebar {
 	width: 20%;
 	padding: 7px;
-	color: var(--main-purple);
 	font-size: larger;
 	font-weight: bolder;
 }
-.activity,
-.main {
+.main,
+.activity {
+	width: 40%;
+}
+.activity-title,
+.main .dashboard-title,
+.main .transaction-title {
 	font-size: larger;
 	font-weight: bolder;
 	color: var(--main-purple);
-	width: 40%;
 	padding: 7px;
 	display: flex;
 	flex-direction: column;
@@ -82,12 +85,54 @@ body {
 	padding: 7px;
 	margin-bottom: 20px;
 }
+
+.sidebar-list {
+	display: flex;
+	flex-direction: column;
+}
+.sidebar-list > div > a {
+	text-decoration: none;
+	font-size: 14px;
+	color: gray;
+}
+.sidebar-list > div {
+	margin: 15px;
+	display: flex;
+}
+
+.transaction-list > ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 7px;
+	font-size: small;
+	display: inline-block;
+}
+/* CARD BODY */
 .card-body {
 	padding: 7px;
 	background-color: var(--main-purple);
 	position: relative;
-	width: 350px;
-	height: 200px;
+	width: 328px;
+	height: 191px;
 	border-radius: 40px;
 	color: white;
+}
+.card-body {
+	color: rgb(170, 150, 180);
+	position: relative;
+}
+.card-name {
+	color: white;
+	font-size: xx-large;
+	font-weight: bolder;
+	padding: 30px;
+}
+.total-balance {
+	padding: 10px 30px;
+}
+.card-balance {
+	color: white;
+	font-size: xx-large;
+	font-weight: bolder;
+	padding-left: 30px;
 }

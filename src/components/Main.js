@@ -1,37 +1,33 @@
 import React, { useContext } from "react";
+import Card from "../assets/Card";
 import { TransactionContext } from "../contexts/TransactionContext";
 
 const Main = () => {
-	const { balance, transactions } = useContext(TransactionContext);
+	const { balance, transactions, isLoading } = useContext(TransactionContext);
+	// const month = today.toLocaleString("default", { month: "long" });
+
 	return (
 		<div className='main'>
 			<div className='dashboard'>
-				Dashboard
+				<dashboard className='dashboard-title'>Dashboard</dashboard>
 				<div className='card-area'>
-					<div className='card-body'>
-						Total balance
-						<div className='card-balance'> {balance}IRR</div>
-					</div>
+					<Card />
 				</div>
 			</div>
 			<div className='transaction'>
-				Transactions
+				<div className='transaction-title'>Transactions</div>
 				<div>
 					<div className='transaction-list'>
-						<ul
-							style={{
-								listStyleType: "none",
-								margin: 0,
-								padding: "7px",
-								fontSize: "small",
-								display: "inline-block",
-							}}
-						>
-							{transactions.map((trans) => (
-								<>
-									<li>{trans.name}</li>
-								</>
-							))}
+						{isLoading && <div style={{ color: "gray", padding: "7px" }}>Loading...</div>}
+						<ul>
+							{transactions &&
+								transactions.map((item) => (
+									<>
+										<div>
+											{item.title} {item.date.slice(0, 10)} {item.amount}
+										</div>
+									</>
+								))}
 						</ul>
 					</div>
 				</div>

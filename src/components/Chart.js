@@ -1,4 +1,4 @@
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 const data = [
 	{ name: "Page A", uv: 400 },
 	{ name: "Page B", uv: 200 },

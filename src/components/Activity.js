@@ -3,8 +3,8 @@ import MyChart from "./Chart";
 const Activity = () => {
 	return (
 		<div className='activity'>
-			<div className='chart'>Activity</div>
-			<MyChart />
+			<div className='activity-title'>Activity</div>
+			{/* <MyChart /> */}
 		</div>
 	);
 };
