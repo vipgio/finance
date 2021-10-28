@@ -19,16 +19,21 @@ const Main = () => {
 				<div>
 					<div className='transaction-list'>
 						{isLoading && <div style={{ color: "gray", padding: "7px" }}>Loading...</div>}
-						<ul>
+						<div>
 							{transactions &&
 								transactions.map((item) => (
-									<>
-										<div>
-											{item.title} {item.date.slice(0, 10)} {item.amount}
+									<div className='transaction-details'>
+										<div className='details-name'>{item.title}</div>
+										<div className='details-date'>{item.date.slice(0, 10)}</div>
+										<div
+											className='details-amount'
+											style={{ color: item.isIncome ? "green" : "red" }}
+										>
+											${item.amount}
 										</div>
-									</>
+									</div>
 								))}
-						</ul>
+						</div>
 					</div>
 				</div>
 			</div>
