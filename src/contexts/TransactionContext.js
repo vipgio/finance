@@ -1,12 +1,11 @@
 import React, { createContext, useState, useEffect } from "react";
-import { v1 as uuid } from "uuid";
 
 export const TransactionContext = createContext();
 
 const TransactionContextProvider = (props) => {
 	const [transactions, setTransactions] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [balance, setBalance] = useState(27000);
+	const [balance] = useState(27000);
 	const numberToCurrency = (num) => {
 		return new Intl.NumberFormat("en-US", {
 			style: "currency",
@@ -26,7 +25,7 @@ const TransactionContextProvider = (props) => {
 				console.log(err.data);
 			});
 		console.log(transactions);
-	}, []);
+	}, [transactions]);
 	return (
 		<TransactionContext.Provider
 			value={{ transactions, balance, isLoading, numberToCurrency }}

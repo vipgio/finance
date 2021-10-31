@@ -3,7 +3,7 @@ import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
 // import MyChart from "./components/Chart";
 import TransactionContextProvider from "./contexts/TransactionContext";
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
 	return (

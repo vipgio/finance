@@ -4,8 +4,7 @@ import { TransactionContext } from "../contexts/TransactionContext";
 import TransactionList from "../assets/TransactionList";
 
 const Main = () => {
-	const { balance, transactions, isLoading, numberToCurrency } =
-		useContext(TransactionContext);
+	const { balance, transactions, isLoading } = useContext(TransactionContext);
 	// const month = today.toLocaleString("default", { month: "long" });
 
 	return (
