@@ -151,13 +151,14 @@ body {
 .details-name {
 	color: var(--main-purple);
 	font-weight: 800;
+	width: 45%;
 }
 .details-date {
-	display: inline-block;
-	margin-left: 100px;
 	color: gray;
+	width: 30%;
 }
 .details-amount {
-	margin-left: auto;
+	width: 25%;
+	text-align: right;
 	margin-right: 30px;
 }
