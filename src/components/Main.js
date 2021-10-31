@@ -11,7 +11,7 @@ const Main = () => {
 	return (
 		<div className='main'>
 			<div className='dashboard'>
-				<dashboard className='dashboard-title'>Dashboard</dashboard>
+				<div className='dashboard-title'>Dashboard</div>
 				<div className='card-area'>
 					<Card balance={balance} />
 				</div>
@@ -22,7 +22,9 @@ const Main = () => {
 				<div className='transaction-list'>
 					{isLoading && <div style={{ color: "gray", padding: "7px" }}>Loading...</div>}
 					{transactions.total > 0 &&
-						transactions.items.map((item) => <TransactionList item={item} />)}
+						transactions.items.map((item) => (
+							<TransactionList item={item} key={item.sys.id} />
+						))}
 				</div>
 			</div>
 		</div>
