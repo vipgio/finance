@@ -47,10 +47,13 @@ body {
 .main {
 	background-color: white;
 }
-.sidebar,
-.activity {
+.sidebar {
 	background-color: rgb(250, 250, 250);
 	display: flex;
+}
+.activity {
+	background-color: rgb(250, 250, 250);
+	display: inline-block;
 }
 .sidebar {
 	width: 20%;
@@ -61,6 +64,7 @@ body {
 .main,
 .activity {
 	width: 40%;
+	padding-left: 15px;
 }
 .activity-title,
 .main .dashboard-title,
@@ -79,6 +83,7 @@ body {
 }
 .dashboard {
 	margin-bottom: 20px;
+	padding-top: 22px;
 	position: relative;
 }
 .card-area {
@@ -151,6 +156,7 @@ body {
 .details-name {
 	color: var(--main-purple);
 	font-weight: 800;
+	margin-left: 10px;
 	width: 45%;
 }
 .details-date {
@@ -160,5 +166,20 @@ body {
 .details-amount {
 	width: 25%;
 	text-align: right;
-	margin-right: 30px;
+	margin-right: 15px;
+}
+.edit-icon {
+	margin-left: -12px;
+	padding-right: 2px;
+	color: white;
+}
+.edit-icon:hover {
+	color: var(--main-purple);
+}
+.delete-icon {
+	color: white;
+	padding-right: 7px;
+}
+.delete-icon:hover {
+	color: var(--main-purple);
 }
