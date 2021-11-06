@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { TransactionContext } from "../contexts/TransactionContext";
+import Chart from "../assets/Chart";
 
 const Activity = () => {
 	const { balance, numberToCurrency } = useContext(TransactionContext);
+
 	return (
 		<div className='activity'>
 			<div
@@ -23,7 +25,7 @@ const Activity = () => {
 			>
 				{numberToCurrency(balance)}
 			</div>
-			{/* <MyChart /> */}
+			<Chart />
 		</div>
 	);
 };

@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { TransactionContext } from "../contexts/TransactionContext";
-import { BiPencil, BiTrash } from "react-icons/bi";
+import { BiTrash } from "react-icons/bi";
 
 const TransactionList = ({ item }) => {
-	const { numberToCurrency } = useContext(TransactionContext);
+	const { numberToCurrency, deleteTransaction } = useContext(TransactionContext);
 	return (
 		<div className='transaction-details' key={item.sys.id}>
-			<BiPencil className='edit-icon' />
+			{/* <BiPencil className='edit-icon' /> */}
 			<div className='details-name'>{item.fields.title}</div>
 			<div className='details-date'>{item.fields.date.slice(0, 10)}</div>
 			<div
@@ -15,7 +15,11 @@ const TransactionList = ({ item }) => {
 			>
 				{numberToCurrency(item.fields.amount)}
 			</div>
-			<BiTrash className='delete-icon' />
+			<BiTrash
+				className='delete-icon'
+				onClick={() => deleteTransaction(item.sys.id)}
+				size='20px'
+			/>
 		</div>
 	);
 };

@@ -1,34 +1,114 @@
 import React, { createContext, useState, useEffect } from "react";
+import { v1 as uuid } from "uuid";
+const contentful = require("contentful");
+const contentfulManagement = require("contentful-management");
 
 export const TransactionContext = createContext();
 
 const TransactionContextProvider = (props) => {
 	const [transactions, setTransactions] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [balance] = useState(27000);
+	const [balance, setBalance] = useState(0);
+	const [formIsActive, setFormIsActive] = useState(false);
+
 	const numberToCurrency = (num) => {
 		return new Intl.NumberFormat("en-US", {
 			style: "currency",
 			currency: "USD",
 		}).format(num);
 	};
+	const updateList = () => {
+		const client = contentful.createClient({
+			space: "5rirqymvemuy",
+			accessToken: "FYR9n1Y7T1wOypOe1vObsgNJkU_M2fqtN8T_NznjZzE",
+		});
+		client.getEntries().then((entries) => {
+			setTransactions(entries);
+			setIsLoading(false);
+		});
+	};
+
 	useEffect(() => {
-		fetch(
-			"https://cdn.contentful.com/spaces/5rirqymvemuy/environments/master/entries?access_token=FYR9n1Y7T1wOypOe1vObsgNJkU_M2fqtN8T_NznjZzE"
-		)
-			.then((res) => res.json())
-			.then((data) => {
-				setTransactions(data);
-				setIsLoading(false);
-			})
-			.catch((err) => {
-				console.log(err.data);
+		updateList();
+	}, []);
+
+	useEffect(() => {
+		let total = 0;
+		if (transactions.items) {
+			transactions.items.forEach((item) => {
+				item.fields.isIncome
+					? (total += item.fields.amount)
+					: (total -= item.fields.amount);
 			});
-		console.log(transactions);
+			setBalance(total);
+		}
 	}, [transactions]);
+
+	const deleteTransaction = (id) => {
+		const client = contentfulManagement.createClient({
+			accessToken: "CFPAT-gndlrR56UY7koV260gjvpIPPK3-4D0hgn0sh9AhovJI",
+		});
+		client
+			.getSpace("5rirqymvemuy")
+			.then((space) => space.getEnvironment("master"))
+			.then((environment) => environment.getEntry(id))
+			.then((entry) => entry.unpublish())
+			.then((entry) => entry.delete())
+			.then(() => {
+				updateList();
+			})
+			.catch(console.error);
+	};
+
+	const addTransaction = (transactionDetails) => {
+		const { title, amount, isIncome, date } = transactionDetails;
+		const client = contentfulManagement.createClient({
+			accessToken: "CFPAT-gndlrR56UY7koV260gjvpIPPK3-4D0hgn0sh9AhovJI",
+		});
+		client
+			.getSpace("5rirqymvemuy")
+			.then((space) => space.getEnvironment("master"))
+			.then((environment) =>
+				environment.createEntryWithId("transaction", uuid(), {
+					fields: {
+						title: {
+							"en-US": title,
+						},
+						amount: {
+							"en-US": Number(amount),
+						},
+						date: {
+							"en-US": date,
+						},
+						isIncome: {
+							"en-US": Boolean(isIncome),
+						},
+					},
+				})
+			)
+			.then((entry) => {
+				entry.publish();
+				console.log(`Entry ${entry.sys.id} published.`);
+			})
+			.then(() => {
+				setTimeout(() => updateList(), 1000);
+				setFormIsActive(false);
+			})
+			.catch(console.error);
+	};
 	return (
 		<TransactionContext.Provider
-			value={{ transactions, balance, isLoading, numberToCurrency }}
+			value={{
+				transactions,
+				balance,
+				isLoading,
+				numberToCurrency,
+				deleteTransaction,
+				setBalance,
+				formIsActive,
+				setFormIsActive,
+				addTransaction,
+			}}
 		>
 			{props.children}
 		</TransactionContext.Provider>
