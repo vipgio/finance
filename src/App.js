@@ -1,9 +1,10 @@
 import Activity from "./components/Activity";
 import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
-// import MyChart from "./components/Chart";
 import TransactionContextProvider from "./contexts/TransactionContext";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import IncomePage from "./components/IncomePage";
+import ExpansePage from "./components/ExpansePage";
 
 function App() {
 	return (
@@ -14,8 +15,23 @@ function App() {
 					<div className='box'>
 						<TransactionContextProvider>
 							<Sidebar />
-							<Main />
-							<Activity />
+							<Switch>
+								<Route exact path='/'>
+									<>
+										<Main />
+										<Activity />
+									</>
+								</Route>
+								<Route path='/income'>
+									<IncomePage />
+								</Route>
+								<Route path='/expanse'>
+									<ExpansePage />
+								</Route>
+								<Route>
+									<div>WRONG</div>
+								</Route>
+							</Switch>
 						</TransactionContextProvider>
 					</div>
 				</div>

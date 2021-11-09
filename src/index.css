@@ -17,8 +17,8 @@ body {
 	overflow: hidden;
 }
 .content {
-	width: 1150px;
-	height: 575px;
+	width: 1000px;
+	height: 500px;
 	background-color: white;
 	border-radius: 50%;
 	position: relative;
@@ -30,6 +30,7 @@ body {
 	width: 100%;
 	position: relative;
 	height: 100%;
+	background-color: white;
 }
 .box-effect {
 	background-color: rgb(244, 228, 218);
@@ -69,21 +70,26 @@ body {
 }
 .activity-title,
 .main .dashboard-title,
-.main .transaction-title {
+.main .transaction-title,
+.expanse-title,
+.expanse-total,
+.income-title,
+.income-total {
 	font-size: larger;
 	font-weight: bolder;
 	color: var(--main-purple);
 	padding: 7px;
-	/* flex-direction: column; */
 }
 .sidebar-list {
 	list-style-type: none;
 	margin: 5px;
 	padding: 5px;
 }
-.dashboard {
+.dashboard,
+.expanse-title,
+.income-title {
 	margin-bottom: 20px;
-	padding-top: 22px;
+	padding-top: 25px;
 	position: relative;
 }
 .card-area {
@@ -156,7 +162,9 @@ body {
 	padding: 10px;
 	align-items: center;
 }
-.transaction-title {
+.transaction-title,
+.expanse-title,
+.income-title {
 	display: flex;
 }
 /*////////////////////////////////////////////////////////////////*/
@@ -178,6 +186,7 @@ body {
 .add-button {
 	cursor: pointer;
 	margin-left: auto;
+	padding-right: 40px;
 }
 .delete-icon {
 	color: white;
@@ -237,12 +246,22 @@ select {
 	left: 0;
 	z-index: -1;
 }
-/* .form-close-button::after {
-	content: "";
-	position: fixed;
-	height: 100vh;
-	width: 100vw;
-	top: 0;
-	left: 0;
-	z-index: -1;
-} */
+/*///////////////////////////////////////////////////*/
+.income-page,
+.expanse-page {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding-left: 15px;
+}
+.income-total,
+.expanse-total {
+	display: flex;
+	margin-top: auto;
+	margin-bottom: 20px;
+}
+.income-total-amount,
+.expanse-total-amount {
+	margin-left: auto;
+	margin-right: 47px;
+}
