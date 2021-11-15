@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Card from "../assets/Card";
 import { TransactionContext } from "../contexts/TransactionContext";
 import TransactionList from "../assets/TransactionList";
-import { BiPlusCircle } from "react-icons/bi";
 import AddForm from "../assets/AddForm";
 
 const Main = () => {
@@ -22,7 +21,9 @@ const Main = () => {
 			<div className='transaction'>
 				<div className='transaction-title'>
 					Transactions
-					<BiPlusCircle className='add-button' onClick={() => setFormIsActive(true)} />
+					<button className='add-button' onClick={() => setFormIsActive(true)}>
+						Add transaction
+					</button>
 				</div>
 				<div className='transaction-list'>
 					{isLoading && <div style={{ color: "gray", padding: "7px" }}>Loading...</div>}

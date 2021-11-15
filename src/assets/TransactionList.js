@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { TransactionContext } from "../contexts/TransactionContext";
 import { BiTrash } from "react-icons/bi";
+import { DateTime } from "luxon";
 
 const TransactionList = ({ item }) => {
 	const { numberToCurrency, deleteTransaction } = useContext(TransactionContext);
@@ -8,7 +9,9 @@ const TransactionList = ({ item }) => {
 		<div className='transaction-details' key={item.sys.id}>
 			{/* <BiPencil className='edit-icon' /> */}
 			<div className='details-name'>{item.fields.title}</div>
-			<div className='details-date'>{item.fields.date.slice(0, 10)}</div>
+			<div className='details-date'>
+				{DateTime.fromISO(item.fields.date).toFormat("LLL dd',' yyyy")}
+			</div>
 			<div
 				className='details-amount'
 				style={{ color: item.fields.isIncome ? "green" : "red" }}

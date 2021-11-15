@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { TransactionContext } from "../contexts/TransactionContext";
+import { DateTime } from "luxon";
 
 const AddForm = () => {
 	const { formIsActive, setFormIsActive, addTransaction } =
@@ -38,6 +39,7 @@ const AddForm = () => {
 					<input
 						type='datetime-local'
 						required
+						max={`${DateTime.now().toISODate()}T00:00`} //'2021-11-15T00:00' //????
 						value={transactionForm.date}
 						onChange={(e) =>
 							setTransactionForm((prev) => ({ ...prev, date: e.target.value }))
@@ -48,6 +50,7 @@ const AddForm = () => {
 					<input
 						type='number'
 						required
+						min='1'
 						value={transactionForm.amount}
 						onChange={(e) =>
 							setTransactionForm((prev) => ({ ...prev, amount: e.target.value }))
@@ -55,27 +58,27 @@ const AddForm = () => {
 					/>
 
 					<label>Choose income or expanse:</label>
-					<select
-						value={transactionForm.isIncome}
+					<div
+						className='radio'
 						onChange={(e) =>
 							setTransactionForm((prev) => ({ ...prev, isIncome: e.target.value }))
 						}
 					>
-						<option value='' disabled hidden>
-							Choose here
-						</option>
-						<option value={true}>Income</option>
-						<option value={false}>Expanse</option>
-					</select>
+						<span>
+							<input className='radio-i' type='radio' value={true} name='isIncome' />
+							<label style={{ verticalAlign: "middle" }}>Income</label>
 
-					<button>Add transaction</button>
+							<input className='radio-e' type='radio' value={false} name='isIncome' />
+							<label style={{ verticalAlign: "middle" }}>Expanse</label>
+						</span>
+					</div>
+
+					<button className='submit-button'>Add transaction</button>
 					{/* {isUploading && <button disabled>Adding blog...</button>} */}
 					{/* {!isUploading && <button>Add blog</button>}
 					{isUploading && <button disabled>Adding blog...</button>} */}
 				</form>
-				<div className='form-close-button' onClick={() => setFormIsActive(false)}>
-					{" "}
-				</div>
+				<div className='form-close-button' onClick={() => setFormIsActive(false)} />
 			</div>
 		)
 	);

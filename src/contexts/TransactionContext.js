@@ -23,7 +23,10 @@ const TransactionContextProvider = (props) => {
 			accessToken: "FYR9n1Y7T1wOypOe1vObsgNJkU_M2fqtN8T_NznjZzE",
 		});
 		client.getEntries().then((entries) => {
-			setTransactions(entries);
+			setTransactions({
+				...entries,
+				items: entries.items.sort((a, b) => (a.fields.date < b.fields.date ? 1 : -1)),
+			});
 			setIsLoading(false);
 		});
 	};
@@ -33,14 +36,16 @@ const TransactionContextProvider = (props) => {
 	}, []);
 
 	useEffect(() => {
-		let total = 0;
 		if (transactions.items) {
-			transactions.items.forEach((item) => {
-				item.fields.isIncome
-					? (total += item.fields.amount)
-					: (total -= item.fields.amount);
-			});
-			setBalance(total);
+			setBalance(() =>
+				transactions.items.reduce(
+					(acc, item) =>
+						item.fields.isIncome
+							? (acc += item.fields.amount)
+							: (acc -= item.fields.amount),
+					0
+				)
+			);
 		}
 	}, [transactions]);
 
