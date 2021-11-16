@@ -4,7 +4,7 @@ import Sidebar from "./components/Sidebar";
 import TransactionContextProvider from "./contexts/TransactionContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import IncomePage from "./components/IncomePage";
-import ExpansePage from "./components/ExpansePage";
+import ExpensePage from "./components/ExpensePage";
 
 function App() {
 	return (
@@ -25,8 +25,8 @@ function App() {
 								<Route path='/income'>
 									<IncomePage />
 								</Route>
-								<Route path='/expanse'>
-									<ExpansePage />
+								<Route path='/expense'>
+									<ExpensePage />
 								</Route>
 								<Route>
 									<div>WRONG</div>

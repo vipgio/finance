@@ -34,10 +34,10 @@ const Sidebar = () => {
 					<div className='sidebar-expanse'>
 						<BsBoxArrowRight style={{ marginRight: "15px", color: "red" }} />
 						<NavLink
-							to='/expanse'
+							to='/expense'
 							activeStyle={{ color: "rgb(75, 49, 83)", fontSize: "0.9em" }}
 						>
-							Expanse
+							Expense
 						</NavLink>
 					</div>
 				</div>

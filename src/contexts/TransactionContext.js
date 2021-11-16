@@ -10,6 +10,9 @@ const TransactionContextProvider = (props) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [balance, setBalance] = useState(0);
 	const [formIsActive, setFormIsActive] = useState(false);
+	const [isUploading, setIsUploading] = useState(false);
+	const emptyForm = { title: "", amount: "", isIncome: false, date: "" };
+	const [transactionForm, setTransactionForm] = useState(emptyForm);
 
 	const numberToCurrency = (num) => {
 		return new Intl.NumberFormat("en-US", {
@@ -50,6 +53,7 @@ const TransactionContextProvider = (props) => {
 	}, [transactions]);
 
 	const deleteTransaction = (id) => {
+		setIsLoading(true);
 		const client = contentfulManagement.createClient({
 			accessToken: "CFPAT-gndlrR56UY7koV260gjvpIPPK3-4D0hgn0sh9AhovJI",
 		});
@@ -66,6 +70,7 @@ const TransactionContextProvider = (props) => {
 	};
 
 	const addTransaction = (transactionDetails) => {
+		setIsUploading(true);
 		const { title, amount, isIncome, date } = transactionDetails;
 		const client = contentfulManagement.createClient({
 			accessToken: "CFPAT-gndlrR56UY7koV260gjvpIPPK3-4D0hgn0sh9AhovJI",
@@ -97,7 +102,12 @@ const TransactionContextProvider = (props) => {
 			})
 			.then(() => {
 				setTimeout(() => updateList(), 1000);
+			})
+			.then(() => {
+				setIsLoading(true);
+				setIsUploading(false);
 				setFormIsActive(false);
+				setTransactionForm(emptyForm);
 			})
 			.catch(console.error);
 	};
@@ -113,6 +123,9 @@ const TransactionContextProvider = (props) => {
 				formIsActive,
 				setFormIsActive,
 				addTransaction,
+				isUploading,
+				transactionForm,
+				setTransactionForm,
 			}}
 		>
 			{props.children}

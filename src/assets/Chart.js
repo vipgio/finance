@@ -6,43 +6,73 @@ import { DateTime } from "luxon";
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const Chart = ({ transactionData, balance }) => {
-	const chartData = [
-		{ x: DateTime.now().plus({ months: -0 }).toFormat("LLL"), y: balance },
-	];
-	for (let i = 0; i <= 4; i++) {
-		let folan = {
-			x: DateTime.now()
-				.plus({ months: -i - 1 })
-				.toFormat("LLL"),
-			y: transactionData
-				?.filter(
-					(transaction) =>
-						DateTime.fromISO(transaction.fields.date).toFormat("LLL yy") ===
-						DateTime.now().plus({ months: -i }).toFormat("LLL yy")
-				)
-				.reduce(
-					(acc, cur) =>
-						(acc = cur.fields.isIncome
-							? acc - cur.fields.amount
-							: acc + cur.fields.amount),
-					chartData[i].y
-				),
-		};
-		chartData.push(folan);
+const Chart = ({ transactionData, balance, flag }) => {
+	let data;
+	if (flag) {
+		const chartData = [
+			{ x: DateTime.now().plus({ months: -0 }).toFormat("LLL"), y: balance },
+		];
+		for (let i = 0; i <= 4; i++) {
+			let folan = {
+				x: DateTime.now()
+					.plus({ months: -i - 1 })
+					.toFormat("LLL"),
+				y: transactionData
+					?.filter(
+						(transaction) =>
+							DateTime.fromISO(transaction.fields.date).toFormat("LLL yy") ===
+							DateTime.now().plus({ months: -i }).toFormat("LLL yy")
+					)
+					.reduce(
+						(acc, cur) =>
+							(acc = cur.fields.isIncome
+								? acc - cur.fields.amount
+								: acc + cur.fields.amount),
+						chartData[i].y
+					),
+			};
+			chartData.push(folan);
+		}
+		data = [
+			{
+				id: "balance:",
+				color: "hsl(169, 70%, 50%)",
+				data: chartData.reverse(),
+			},
+		];
+	} else {
+		const chartData = [];
+		for (let i = 0; i <= 5; i++) {
+			let folan = {
+				x: DateTime.now().plus({ months: -i }).toFormat("LLL"),
+				y: transactionData
+					?.filter(
+						(transaction) =>
+							DateTime.fromISO(transaction.fields.date).toFormat("LLL yy") ===
+							DateTime.now().plus({ months: -i }).toFormat("LLL yy")
+					)
+					.reduce(
+						(acc, cur) =>
+							(acc = cur.fields.isIncome
+								? acc + cur.fields.amount
+								: acc - cur.fields.amount),
+						0
+					),
+			};
+			chartData.push(folan);
+		}
+		data = [
+			{
+				id: "balance:",
+				color: "hsl(169, 70%, 50%)",
+				data: chartData.reverse(),
+			},
+		];
 	}
-
-	const data = [
-		{
-			id: "balance:",
-			color: "hsl(169, 70%, 50%)",
-			data: chartData.reverse(),
-		},
-	];
 	return (
 		<ResponsiveLine
 			data={data}
-			margin={{ top: 50, right: 30, bottom: 150, left: 60 }}
+			margin={{ top: 70, right: 30, bottom: 150, left: 60 }}
 			xScale={{ type: "point" }}
 			yScale={{ type: "linear", min: "auto", max: "auto", stacked: true, reverse: false }}
 			yFormat=' >-.2f'
