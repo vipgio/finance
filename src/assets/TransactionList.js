@@ -7,7 +7,6 @@ const TransactionList = ({ item }) => {
 	const { numberToCurrency, deleteTransaction } = useContext(TransactionContext);
 	return (
 		<div className='transaction-details' key={item.sys.id}>
-			{/* <BiPencil className='edit-icon' /> */}
 			<div className='details-name'>{item.fields.title}</div>
 			<div className='details-date'>
 				{DateTime.fromISO(item.fields.date).toFormat("LLL dd',' yyyy")}

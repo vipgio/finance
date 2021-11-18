@@ -7,7 +7,6 @@ import AddForm from "../assets/AddForm";
 const Main = () => {
 	const { balance, transactions, setFormIsActive, isLoading } =
 		useContext(TransactionContext);
-	// const month = today.toLocaleString("default", { month: "long" });
 
 	return (
 		<div className='main'>
