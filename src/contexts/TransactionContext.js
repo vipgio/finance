@@ -6,13 +6,13 @@ const contentfulManagement = require("contentful-management");
 export const TransactionContext = createContext();
 
 const TransactionContextProvider = (props) => {
+	const emptyForm = { title: "", amount: "", isIncome: "", date: "" };
+	const [transactionForm, setTransactionForm] = useState(emptyForm);
 	const [transactions, setTransactions] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [balance, setBalance] = useState(0);
 	const [formIsActive, setFormIsActive] = useState(false);
 	const [isUploading, setIsUploading] = useState(false);
-	const emptyForm = { title: "", amount: "", isIncome: "", date: "" };
-	const [transactionForm, setTransactionForm] = useState(emptyForm);
 
 	const numberToCurrency = (num) => {
 		return new Intl.NumberFormat("en-US", {
@@ -31,7 +31,6 @@ const TransactionContextProvider = (props) => {
 				items: entries.items.sort((a, b) => (a.fields.date < b.fields.date ? 1 : -1)),
 			});
 			setIsLoading(false);
-			// console.log(transactions);
 		});
 	};
 
@@ -100,7 +99,6 @@ const TransactionContextProvider = (props) => {
 			.then((entry) => {
 				entry.publish();
 				console.log(`Entry ${entry.sys.id} published.`);
-				// console.log(entry);
 			})
 			.then(() => {
 				setTimeout(() => updateList(), 1000);
