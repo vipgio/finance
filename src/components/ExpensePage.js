@@ -29,7 +29,8 @@ const ExpensePage = () => {
 			</div>
 			<div className='expense-list'>
 				{isLoading && <div style={{ color: "gray", padding: "7px" }}>Loading...</div>}
-				{transactions.total &&
+				{!isLoading &&
+					transactions.total &&
 					transactions.items
 						.filter((item) => !item.fields.isIncome)
 						.map((expenseItem) => (

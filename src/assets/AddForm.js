@@ -15,6 +15,7 @@ const AddForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		addTransaction(transactionForm);
+		console.log(transactionForm);
 	};
 	return (
 		formIsActive && (
@@ -58,40 +59,69 @@ const AddForm = () => {
 						disabled={isUploading && true}
 						min='1'
 						value={transactionForm.amount}
-						onChange={(e) =>
-							setTransactionForm((prev) => ({ ...prev, amount: e.target.value }))
-						}
+						onChange={(e) => {
+							setTransactionForm((prev) => ({ ...prev, amount: e.target.value }));
+							console.log("amount: ", transactionForm.amount);
+						}}
 					/>
+					<label>Choose income or expense:</label>
+					<div className='radio'>
+						<input
+							className='radio-i'
+							type='radio'
+							value={true}
+							name='isIncome'
+							// disabled={isUploading && true}
+							onChange={(e) => {
+								console.log(e.target.value);
+								setTransactionForm((prev) => ({ ...prev, isIncome: true }));
+								console.log("before: ", transactionForm);
+								setTimeout(() => console.log(transactionForm), 2000);
+							}}
+						/>
+						<label style={{ verticalAlign: "middle" }}>Income</label>
 
-					<label>Choose income or expanse:</label>
-					<div
-						className='radio'
-						onChange={(e) =>
-							setTransactionForm((prev) => ({ ...prev, isIncome: e.target.value }))
-						}
-					>
-						<span>
-							<input
-								className='radio-i'
-								type='radio'
-								value={true}
-								name='isIncome'
-								disabled={isUploading && true}
-							/>
-							<label style={{ verticalAlign: "middle" }}>Income</label>
-
-							<input
-								className='radio-e'
-								type='radio'
-								value={false}
-								name='isIncome'
-								disabled={isUploading && true}
-							/>
-							<label style={{ verticalAlign: "middle" }}>Expanse</label>
-						</span>
+						<input
+							className='radio-e'
+							type='radio'
+							value={false}
+							name='isIncome'
+							// disabled={isUploading && true}
+							onChange={(e) => {
+								console.log(e.target.value);
+								setTransactionForm((prev) => ({ ...prev, isIncome: false }));
+								console.log("before: ", transactionForm);
+								setTimeout(() => console.log(transactionForm), 2000);
+							}}
+						/>
+						<label style={{ verticalAlign: "middle" }}>Expense</label>
 					</div>
+					{/* <div>
+						<input
+							type='checkbox'
+							id='income'
+							value={true}
+							onClick={(e) => {
+								console.log(e.target.value);
+								setTransactionForm((prev) => ({ ...prev, isIncome: true }));
+								setTimeout(() => console.log(transactionForm), 1000);
+							}}
+						/>
+						<label htmlFor='income'> Income</label>
+						<input
+							type='checkbox'
+							id='expense'
+							value={false}
+							onClick={(e) => {
+								console.log(e.target.value);
+								setTransactionForm((prev) => ({ ...prev, isIncome: false }));
+								setTimeout(() => console.log(transactionForm), 1000);
+							}}
+						/>
+						<label htmlFor='expense'> Expense</label>
+						<div>{transactionForm.isIncome ? "true" : "false"}</div>
+					</div> */}
 
-					{/* <button className='submit-button'>Add transaction</button> */}
 					{!isUploading && <button className='submit-button'>Add transaction</button>}
 					{isUploading && (
 						<button className='submit-button-loading' disabled>

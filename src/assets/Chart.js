@@ -63,8 +63,8 @@ const Chart = ({ transactionData, balance, flag }) => {
 		}
 		data = [
 			{
-				id: "balance:",
-				color: "hsl(169, 70%, 50%)",
+				id: "Income:",
+				color: "hsl(41, 70%, 50%)",
 				data: chartData.reverse(),
 			},
 		];
@@ -72,6 +72,7 @@ const Chart = ({ transactionData, balance, flag }) => {
 	return (
 		<ResponsiveLine
 			data={data}
+			colors={["rgb(235, 205, 180)"]}
 			margin={{ top: 70, right: 30, bottom: 150, left: 60 }}
 			xScale={{ type: "point" }}
 			yScale={{ type: "linear", min: "auto", max: "auto", stacked: true, reverse: false }}
@@ -83,7 +84,6 @@ const Chart = ({ transactionData, balance, flag }) => {
 			curve='monotoneX'
 			enableArea={true}
 			enablePoints={false}
-			// enableCrosshair={false}
 			axisBottom={{
 				orient: "bottom",
 				tickSize: 0,
@@ -97,12 +97,11 @@ const Chart = ({ transactionData, balance, flag }) => {
 				tickSize: 5,
 				tickPadding: 5,
 				tickRotation: 0,
-				legend: "balance",
+				legend: flag ? "balance" : "income",
 				legendOffset: -40,
 				legendPosition: "middle",
 			}}
 			pointSize={10}
-			pointColor={{ theme: "background" }}
 			pointBorderWidth={2}
 			pointBorderColor={{ from: "serieColor" }}
 			pointLabelYOffset={-12}

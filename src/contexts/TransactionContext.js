@@ -11,7 +11,7 @@ const TransactionContextProvider = (props) => {
 	const [balance, setBalance] = useState(0);
 	const [formIsActive, setFormIsActive] = useState(false);
 	const [isUploading, setIsUploading] = useState(false);
-	const emptyForm = { title: "", amount: "", isIncome: false, date: "" };
+	const emptyForm = { title: "", amount: "", isIncome: "", date: "" };
 	const [transactionForm, setTransactionForm] = useState(emptyForm);
 
 	const numberToCurrency = (num) => {
@@ -31,6 +31,7 @@ const TransactionContextProvider = (props) => {
 				items: entries.items.sort((a, b) => (a.fields.date < b.fields.date ? 1 : -1)),
 			});
 			setIsLoading(false);
+			// console.log(transactions);
 		});
 	};
 
@@ -99,6 +100,7 @@ const TransactionContextProvider = (props) => {
 			.then((entry) => {
 				entry.publish();
 				console.log(`Entry ${entry.sys.id} published.`);
+				// console.log(entry);
 			})
 			.then(() => {
 				setTimeout(() => updateList(), 1000);
