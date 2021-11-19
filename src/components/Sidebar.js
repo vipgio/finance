@@ -8,10 +8,10 @@ const Sidebar = () => {
 	return (
 		<div className='sidebar'>
 			<div className='sidebar-options'>
+				<div className='sidebar-logo'>
+					<SiSamsungpay size='1.5em' style={{ paddingBottom: "10px" }} />
+				</div>
 				<div className='sidebar-list'>
-					<div className='sidebar-logo'>
-						<SiSamsungpay size='1.5em' style={{ paddingBottom: "10px" }} />
-					</div>
 					<div className='sidebar-dashboard'>
 						<HiOutlineHome style={{ marginRight: "15px" }} />
 						<NavLink

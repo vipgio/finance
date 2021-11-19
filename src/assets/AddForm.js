@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { TransactionContext } from "../contexts/TransactionContext";
 import { DateTime } from "luxon";
@@ -15,8 +15,10 @@ const AddForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		addTransaction(transactionForm);
-		console.log(transactionForm);
 	};
+	// const [incomeChecked, setIncomeChecked] = useState(false);
+	// const [expenseChecked, setExpenseChecked] = useState(false);
+
 	return (
 		formIsActive && (
 			<div className='add-modal'>
@@ -58,39 +60,62 @@ const AddForm = () => {
 						required
 						disabled={isUploading && true}
 						min='1'
+						step='0.01'
 						value={transactionForm.amount}
-						onChange={(e) => {
-							setTransactionForm((prev) => ({ ...prev, amount: e.target.value }));
-							console.log("amount: ", transactionForm.amount);
-						}}
+						onChange={(e) =>
+							setTransactionForm((prev) => ({ ...prev, amount: e.target.value }))
+						}
 					/>
 					<label>Choose income or expense:</label>
 					<div className='radio'>
-						<input
-							className='radio-i'
-							type='radio'
-							value={true}
-							name='isIncome'
-							disabled={isUploading && true}
-							required
-							onChange={(e) =>
-								setTransactionForm((prev) => ({ ...prev, isIncome: true }))
-							}
-						/>
-						<label style={{ verticalAlign: "middle" }}>Income</label>
+						<div className='radio-income'>
+							<input
+								className='radio-i'
+								type='radio'
+								value={true}
+								name='isIncome'
+								disabled={isUploading && true}
+								required
+								// checked={incomeChecked}
+								onChange={() =>
+									setTransactionForm((prev) => ({ ...prev, isIncome: true }))
+								}
+							/>
+							<label
+								style={{ verticalAlign: "middle" }}
+								// onClick={() => {
+								// 	setExpenseChecked(false);
+								// 	setIncomeChecked(true);
+								// }}
+							>
+								Income
+							</label>
+						</div>
 
-						<input
-							className='radio-e'
-							type='radio'
-							value={false}
-							name='isIncome'
-							disabled={isUploading && true}
-							required
-							onChange={(e) =>
-								setTransactionForm((prev) => ({ ...prev, isIncome: false }))
-							}
-						/>
-						<label style={{ verticalAlign: "middle" }}>Expense</label>
+						<div className='radio-expense'>
+							<input
+								className='radio-e'
+								type='radio'
+								value={false}
+								name='isIncome'
+								disabled={isUploading && true}
+								required
+								// checked={expenseChecked}
+								onChange={() =>
+									setTransactionForm((prev) => ({ ...prev, isIncome: false }))
+								}
+							/>
+							<label
+								className='radio-e-label'
+								style={{ verticalAlign: "middle" }}
+								// onClick={() => {
+								// 	setExpenseChecked(true);
+								// 	setIncomeChecked(false);
+								// }}
+							>
+								Expense
+							</label>
+						</div>
 					</div>
 
 					{!isUploading && <button className='submit-button'>Add transaction</button>}

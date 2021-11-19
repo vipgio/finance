@@ -63,6 +63,7 @@ const Activity = () => {
 			</div>
 
 			<Chart
+				className='chart'
 				transactionData={transactions.items}
 				balance={balance}
 				flag={chartIsBalance}

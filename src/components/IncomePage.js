@@ -26,6 +26,7 @@ const IncomePage = () => {
 				<button className='add-button' onClick={() => setFormIsActive(true)}>
 					Add transaction
 				</button>
+				<div className='top-shadow'></div>
 			</div>
 			<div className='income-list'>
 				{isLoading && <div style={{ color: "gray", padding: "7px" }}>Loading...</div>}
@@ -38,6 +39,7 @@ const IncomePage = () => {
 						))}
 			</div>
 			<div className='income-total'>
+				<div className='bottom-shadow'></div>
 				<div className='income-total-name'>Total</div>
 				<div className='income-total-amount' style={{ color: "green" }}>
 					{numberToCurrency(totalincome)}

@@ -26,6 +26,7 @@ const ExpensePage = () => {
 				<button className='add-button' onClick={() => setFormIsActive(true)}>
 					Add transaction
 				</button>
+				<div className='top-shadow'></div>
 			</div>
 			<div className='expense-list'>
 				{isLoading && <div style={{ color: "gray", padding: "7px" }}>Loading...</div>}
@@ -38,6 +39,7 @@ const ExpensePage = () => {
 						))}
 			</div>
 			<div className='expense-total'>
+				<div className='bottom-shadow'></div>
 				<div className='expense-total-name'>Total</div>
 				<div className='expense-total-amount' style={{ color: "red" }}>
 					{numberToCurrency(totalExpense)}
