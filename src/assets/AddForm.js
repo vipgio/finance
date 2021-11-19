@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { IoMdClose } from "react-icons/io";
 import { TransactionContext } from "../contexts/TransactionContext";
 import { DateTime } from "luxon";
