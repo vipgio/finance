@@ -73,7 +73,7 @@ const Chart = ({ transactionData, balance, flag }) => {
 		<ResponsiveLine
 			data={data}
 			colors={["rgb(235, 205, 180)"]}
-			margin={{ top: 70, right: 30, bottom: 60, left: 40 }}
+			margin={{ top: 70, right: 30, bottom: 80, left: 40 }}
 			xScale={{ type: "point" }}
 			yScale={{ type: "linear", min: "auto", max: "auto", stacked: true, reverse: false }}
 			yFormat=' >-.2f'

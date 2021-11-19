@@ -61,13 +61,13 @@ const Activity = () => {
 					</div>
 				</div>
 			</div>
-
-			<Chart
-				className='chart'
-				transactionData={transactions.items}
-				balance={balance}
-				flag={chartIsBalance}
-			/>
+			<div className='chart' style={{ height: "400px" }}>
+				<Chart
+					transactionData={transactions.items}
+					balance={balance}
+					flag={chartIsBalance}
+				/>
+			</div>
 		</div>
 	);
 };
