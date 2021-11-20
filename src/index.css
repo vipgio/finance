@@ -400,7 +400,7 @@ body {
 	background-image: linear-gradient(rgba(241, 243, 247, 0), rgba(241, 243, 247, 1));
 	height: 8px;
 	position: absolute;
-	top: -8px;
+	top: -7px;
 	left: 0;
 	right: 18px;
 	z-index: 1;
@@ -452,9 +452,12 @@ body {
 		overflow-y: auto;
 		max-height: 604px;
 	}
-	/* .box-effect {
+	.box-effect {
 		display: none;
-	} */
+	}
+	.content {
+		background: none;
+	}
 	/*////////////////////////Sidebar//////////////////////*/
 	.sidebar {
 		width: 100%;
@@ -532,7 +535,7 @@ body {
 	}
 	.expense-list,
 	.income-list {
-		max-height: 395px;
+		max-height: 418px;
 		height: 100%;
 	}
 	.income-title,
@@ -541,6 +544,9 @@ body {
 		padding-top: 15px;
 	}
 	/*///////////////////////////*/
+	.bottom-shadow {
+		top: -17px;
+	}
 }
 @media only screen and (max-width: 768px) {
 }
