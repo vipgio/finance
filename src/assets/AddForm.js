@@ -74,6 +74,7 @@ const AddForm = () => {
 								type='radio'
 								value={true}
 								name='isIncome'
+								id='income'
 								disabled={isUploading && true}
 								required
 								// checked={incomeChecked}
@@ -87,6 +88,7 @@ const AddForm = () => {
 								// 	setExpenseChecked(false);
 								// 	setIncomeChecked(true);
 								// }}
+								htmlFor='income'
 							>
 								Income
 							</label>
@@ -98,9 +100,9 @@ const AddForm = () => {
 								type='radio'
 								value={false}
 								name='isIncome'
+								id='expense'
 								disabled={isUploading && true}
 								required
-								// checked={expenseChecked}
 								onChange={() =>
 									setTransactionForm((prev) => ({ ...prev, isIncome: false }))
 								}
@@ -108,10 +110,7 @@ const AddForm = () => {
 							<label
 								className='radio-e-label'
 								style={{ verticalAlign: "middle" }}
-								// onClick={() => {
-								// 	setExpenseChecked(true);
-								// 	setIncomeChecked(false);
-								// }}
+								htmlFor='expense'
 							>
 								Expense
 							</label>
