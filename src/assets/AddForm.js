@@ -16,8 +16,6 @@ const AddForm = () => {
 		e.preventDefault();
 		addTransaction(transactionForm);
 	};
-	// const [incomeChecked, setIncomeChecked] = useState(false);
-	// const [expenseChecked, setExpenseChecked] = useState(false);
 
 	return (
 		formIsActive && (
@@ -46,7 +44,7 @@ const AddForm = () => {
 					<input
 						type='datetime-local'
 						required
-						max={`${DateTime.now().toISODate()}T23:59`} //'2021-11-15T23:59'
+						max={`${DateTime.now().toISODate()}T23:59`}
 						value={transactionForm.date}
 						disabled={isUploading && true}
 						onChange={(e) =>
@@ -77,19 +75,11 @@ const AddForm = () => {
 								id='income'
 								disabled={isUploading && true}
 								required
-								// checked={incomeChecked}
 								onChange={() =>
 									setTransactionForm((prev) => ({ ...prev, isIncome: true }))
 								}
 							/>
-							<label
-								style={{ verticalAlign: "middle" }}
-								// onClick={() => {
-								// 	setExpenseChecked(false);
-								// 	setIncomeChecked(true);
-								// }}
-								htmlFor='income'
-							>
+							<label style={{ verticalAlign: "middle" }} htmlFor='income'>
 								Income
 							</label>
 						</div>

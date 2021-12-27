@@ -22,13 +22,16 @@ const TransactionContextProvider = (props) => {
 	};
 	const updateList = () => {
 		const client = contentful.createClient({
-			space: "5rirqymvemuy",
-			accessToken: "FYR9n1Y7T1wOypOe1vObsgNJkU_M2fqtN8T_NznjZzE",
+			space: process.env.REACT_APP_SPACE,
+			accessToken: process.env.REACT_APP_ACCESS_TOKEN,
 		});
 		client.getEntries().then((entries) => {
+			const transactions = entries.items.filter(
+				(item) => item.sys.contentType.sys.id === "transaction"
+			);
 			setTransactions({
 				...entries,
-				items: entries.items.sort((a, b) => (a.fields.date < b.fields.date ? 1 : -1)),
+				items: transactions.sort((a, b) => (a.fields.date < b.fields.date ? 1 : -1)),
 			});
 			setIsLoading(false);
 		});
@@ -55,10 +58,10 @@ const TransactionContextProvider = (props) => {
 	const deleteTransaction = (id) => {
 		setIsLoading(true);
 		const client = contentfulManagement.createClient({
-			accessToken: "CFPAT-gndlrR56UY7koV260gjvpIPPK3-4D0hgn0sh9AhovJI",
+			accessToken: process.env.REACT_APP_ACCESS_TOKEN_MANAGEMENT,
 		});
 		client
-			.getSpace("5rirqymvemuy")
+			.getSpace(process.env.REACT_APP_SPACE)
 			.then((space) => space.getEnvironment("master"))
 			.then((environment) => environment.getEntry(id))
 			.then((entry) => entry.unpublish())
@@ -73,10 +76,10 @@ const TransactionContextProvider = (props) => {
 		setIsUploading(true);
 		const { title, amount, isIncome, date } = transactionDetails;
 		const client = contentfulManagement.createClient({
-			accessToken: "CFPAT-gndlrR56UY7koV260gjvpIPPK3-4D0hgn0sh9AhovJI",
+			accessToken: process.env.REACT_APP_ACCESS_TOKEN_MANAGEMENT,
 		});
 		client
-			.getSpace("5rirqymvemuy")
+			.getSpace(process.env.REACT_APP_SPACE)
 			.then((space) => space.getEnvironment("master"))
 			.then((environment) =>
 				environment.createEntryWithId("transaction", uuid(), {
@@ -98,7 +101,6 @@ const TransactionContextProvider = (props) => {
 			)
 			.then((entry) => {
 				entry.publish();
-				console.log(`Entry ${entry.sys.id} published.`);
 			})
 			.then(() => {
 				setTimeout(() => updateList(), 1000);
